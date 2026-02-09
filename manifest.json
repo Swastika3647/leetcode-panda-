@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "LeetCode Panda Reminder",
+  "version": "1.0",
+  "permissions": ["tabs"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["style.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["Panda.gif"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

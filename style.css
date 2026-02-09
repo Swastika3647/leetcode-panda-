@@ -1,0 +1,64 @@
+#panda-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: floatAround 4s ease-in-out infinite;
+}
+
+#leetcode-panda {
+    width: 110px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Initial soft drop shadow */
+    filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.2));
+}
+
+/* --- THE NEON GLOW EFFECT --- */
+#leetcode-panda:hover {
+    transform: scale(1.15) rotate(3deg);
+    /* Multi-layered glow for depth */
+    filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.9)) 
+            drop-shadow(0px 0px 20px rgba(74, 144, 226, 0.6));
+}
+
+#panda-bubble {
+    position: absolute;
+    bottom: 135px;
+    background: #ffffff;
+    color: #1a1a1a;
+    padding: 12px 16px;
+    border-radius: 18px;
+    width: 180px;
+    font-size: 14px;
+    font-weight: 700; /* Bold text for high visibility */
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    /* Deep shadow and blue border-highlight */
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.3), 
+                inset 0px 0px 0px 2px #4a90e2; 
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* The Speech Bubble "Beak" */
+#panda-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #4a90e2; /* Matches the border-highlight */
+}
+
+@keyframes floatAround {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-18px); }
+}
