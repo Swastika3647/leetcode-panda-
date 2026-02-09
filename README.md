@@ -1,25 +1,125 @@
-🐼 LeetCode Panda Agent
-An interactive productivity companion for the LeetCode grind.
+# 🐼 LeetCode Panda Agent
 
-🚀 Overview
-LeetCode Panda Agent is a Chrome Extension designed to serve as a "Supervisor Agent" for competitive programmers. Built while pursuing a B.Tech in Electronics and Instrumentation Engineering at the University of Kalyani, this project aims to bridge the gap between casual browsing and focused problem-solving.
+A fun, slightly judgmental Chrome extension that keeps you accountable to your **LeetCode goals**.
 
-Having solved over 850 problems on LeetCode, I designed this tool to ensure that my momentum never stalls as I work toward my goal of 1000+ solves and a 2028 graduation.
+If you wander off to Reddit, LinkedIn, or other distractions, a panda shows up to remind you where you *should* be. When you're actually solving problems on LeetCode, the panda politely disappears.
 
-✨ Features
-Intelligent Nudging: The Panda appears on non-coding sites (LinkedIn, Reddit, etc.) but hides when you are on leetcode.com.
+> Productivity, but make it cute.
 
-Boba-Powered Motivation: A floating, boba-drinking Panda companion that waves and reacts to your presence.
+---
 
-The "Guilt Trip" Timer: The Panda grows in size every 5 minutes you spend procrastinating on non-essential tabs.
+## ✨ Features
 
-Neon Glow UI: High-impact visual feedback with a neon aura and highlighted speech bubbles upon interaction.
+* 🐼 **Floating Panda Supervisor**
+  Appears on non‑LeetCode websites to gently (or not so gently) guilt‑trip you back to practice.
 
-Medium Warp: Double-click the Panda to instantly navigate to a random Medium difficulty problem.
+* 🎯 **Smart Website Detection**
+  Automatically hides itself on LeetCode so it never interferes with problem‑solving.
 
-🛠️ Tech Stack
-JavaScript (ES6+): For DOM manipulation and URL tracking logic.
+* ⏱️ **Procrastination Feedback**
+  The longer you stay on distracting sites, the more noticeable the panda becomes.
 
-CSS3: Utilizing @keyframes for floating animations and filter: drop-shadow for the neon glow effects.
+* 🎨 **Minimal & Fun UI**
+  Animated panda with clean CSS styling — playful but not overwhelming.
 
-Chrome Extension API (Manifest V3): For seamless browser integration.
+* 🚫 **No Login. No Data Collection.**
+  Runs fully locally in your browser.
+
+---
+
+## 🧠 Why This Exists
+
+LeetCode consistency is hard. Blocking sites is extreme.
+This extension sits in the middle — **soft accountability**.
+
+Instead of forcefully blocking distractions, it:
+
+* Makes you *aware* of your procrastination
+* Nudges you back toward your goal
+* Keeps things lighthearted
+
+---
+
+## 🛠️ Tech Stack
+
+* **JavaScript** – core extension logic
+* **Chrome Extension APIs**
+* **HTML + CSS** – panda UI & animations
+
+---
+
+## 📂 Project Structure
+
+```
+leetcode-panda-agent/
+├── manifest.json      # Chrome extension config
+├── content.js         # Main logic (site detection + panda behavior)
+├── style.css          # Styling & animations
+├── Panda.gif          # Panda asset
+└── README.md
+```
+
+---
+
+## 🚀 Installation (Local)
+
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/Swastika3647/leetcode-panda-
+   ```
+
+2. Open Chrome and go to
+
+   ```
+   chrome://extensions/
+   ```
+
+3. Enable **Developer mode** (top‑right)
+
+4. Click **Load unpacked**
+
+5. Select the project folder
+
+✅ Panda activated.
+
+---
+
+## 🔮 Future Improvements
+
+* ⏳ Time tracking for non‑LeetCode sites
+* 🧩 Daily LeetCode goal reminders
+* 🎭 Multiple panda moods (motivational / disappointed / proud)
+* ⚙️ Customizable allowed & blocked sites
+* 🌙 Dark‑mode friendly styling
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+* Fork the repo
+* Create a feature branch
+* Submit a pull request
+
+Even small UI or idea improvements are appreciated.
+
+---
+
+## 📜 License
+
+MIT License — feel free to use, modify, and build on it.
+
+---
+
+## 🌱 Author
+
+**Swastika Bhattacharjee**
+BTech EIE • AI/ML Enthusiast • Learning in public
+
+🔗 GitHub: [https://github.com/Swastika3647](https://github.com/Swastika3647)
+
+---
+
+> *Solve the problem. The panda is watching.* 🐼
