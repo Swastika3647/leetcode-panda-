@@ -3,12 +3,42 @@
 const currentUrl = window.location.href;
 const isLeetCode = currentUrl.includes("leetcode.com");
 
+// 1. Define distracting sites
+const isDistractingSite = (host) => {
+    const blacklist = ["reddit.com", "linkedin.com", "youtube.com", "instagram.com", "twitter.com", "x.com"];
+    return blacklist.some(site => host.includes(site));
+};
+
+// 2. Mood-based sentences tailored to your journey
+const moodMessages = {
+    happy: [
+        "850 solved is amazing. 1000 is the goal! 🚀",
+        "ISI Kolkata interns don't scroll LinkedIn! 🧠",
+        "A 2028 grad needs to keep their skills sharp! 🎓"
+    ],
+    annoyed: [
+        "I see you opening that tab... I'm watching. 😑",
+        "Is this meme really more important than a Medium problem? 🧐",
+        "Your streak is waiting for you on LeetCode. Don't let it die! 🔥"
+    ],
+    sad: [
+        "I'm not mad, I'm just disappointed. 😢",
+        "We could have solved a Dynamic Programming problem by now. 💔",
+        "Is this what it takes to get to 1000 solves? 📉"
+    ],
+    angry: [
+        "GO BACK TO WORK Swastika! 💢",
+        "NO MORE SCROLLING. ONLY CODING. 😡",
+        "I will keep teleporting until you solve a Medium Array problem! 🐾"
+    ]
+};
+
 if (!isLeetCode) {
-    // 1. Create the Container
+    // 3. Create the UI Elements
     const container = document.createElement('div');
     container.id = 'panda-container';
-    
-    // 2. Create the Progress Bar (Visual warning of procrastination)
+    document.body.appendChild(container);
+
     const progressBar = document.createElement('div');
     progressBar.id = 'panda-progress';
     const progressFill = document.createElement('div');
@@ -16,54 +46,64 @@ if (!isLeetCode) {
     progressBar.appendChild(progressFill);
     container.appendChild(progressBar);
 
-    // 3. Initialize the Panda Image
     const panda = document.createElement('img');
     panda.id = 'leetcode-panda';
     panda.src = chrome.runtime.getURL('Panda.gif'); 
     container.appendChild(panda);
 
-    // 4. Create the Speech Bubble
     const bubble = document.createElement('div');
     bubble.id = 'panda-bubble';
     container.appendChild(bubble);
 
-    document.body.appendChild(container);
-
-    // 5. Procrastination Logic: Progress bar fills every 2 minutes
+    // 4. State Management
+    // --- UPDATED PROKRASTINATION LOGIC (FAST MODE) ---
     let warningLevel = 0;
+
     const progressInterval = setInterval(() => {
-        if (!window.location.href.includes("leetcode.com")) {
-            warningLevel += 10;
-            progressFill.style.width = Math.min(warningLevel, 100) + '%';
-            if (warningLevel >= 100) {
-                panda.style.filter = 'drop-shadow(0px 0px 10px #ff4757)'; // Glow red
+        if (isDistractingSite(window.location.hostname)) {
+            // Increase by 20 to hit max warning in 5 intervals
+            warningLevel += 20; 
+            
+            const fill = document.getElementById('panda-fill');
+            if (fill) fill.style.width = Math.min(warningLevel, 100) + '%';
+
+            // --- RAPID AVATAR & MESSAGE SWAPPING ---
+            if (warningLevel >= 20 && warningLevel < 40) {
+                panda.src = chrome.runtime.getURL('Panda_Annoyed.gif');
+            } else if (warningLevel >= 40 && warningLevel < 80) {
+                panda.src = chrome.runtime.getURL('Panda_Sad.gif');
+            } else if (warningLevel >= 100) {
+                panda.src = chrome.runtime.getURL('Panda_angry.gif');
+                panda.classList.add('glow-red'); 
+                teleportPanda(container); // Start nagging immediately
             }
         }
-    }, 120000); 
-
-    // 6. Randomized Personality Messages
-    const messages = [
-        "ISI Kolkata interns don't scroll LinkedIn! 🧠",
-        "850 solved is amazing. 1000 is the goal! 🚀",
-        "A 2028 grad needs to keep their skills sharp! 🎓",
-        "Is this tab really more important than a Medium problem? 🧐",
-        "Double click me to warp to your next challenge! 🐾"
-    ];
-
+    }, 3000); // CHANGED: Checks every 3 seconds instead of minutes
+    // 5. Logic to show the correct word sentences for each mood
     const showMessage = () => {
-        bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
+        let currentMood = 'happy';
+        if (warningLevel >= 100) currentMood = 'angry';
+        else if (warningLevel >= 60) currentMood = 'sad';
+        else if (warningLevel >= 30) currentMood = 'annoyed';
+
+        const options = moodMessages[currentMood];
+        bubble.innerText = options[Math.floor(Math.random() * options.length)];
+        
         bubble.style.opacity = '1';
         setTimeout(() => { bubble.style.opacity = '0'; }, 4000);
     };
 
-    // Show message on hover
     panda.addEventListener('mouseenter', showMessage);
 
-    // 7. Interaction: Double Click to Warp to Random Medium
+    // 6. Interaction: Double Click to Warp
     panda.addEventListener('dblclick', () => {
         window.location.href = "https://leetcode.com/problems/random-one-question/?difficulty=MEDIUM";
     });
+}
 
-} else {
-    console.log("Panda is happy! Good luck with your solve.");
+function teleportPanda(el) {
+    const maxX = window.innerWidth - el.offsetWidth;
+    const maxY = window.innerHeight - el.offsetHeight;
+    el.style.left = `${Math.floor(Math.random() * maxX)}px`;
+    el.style.top = `${Math.floor(Math.random() * maxY)}px`;
 }
