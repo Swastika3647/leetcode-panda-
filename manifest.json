@@ -11,9 +11,14 @@
     }
   ],
   "web_accessible_resources": [
-    {
-      "resources": ["Panda.gif"],
-      "matches": ["<all_urls>"]
-    }
-  ]
+  {
+    "resources": [
+      "Panda.gif",
+      "Panda_angry.gif",
+      "Panda_Annoyed.gif",
+      "Panda_Sad.gif"
+    ],
+    "matches": ["<all_urls>"]
+  }
+]
 }
